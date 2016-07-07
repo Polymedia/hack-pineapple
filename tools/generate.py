@@ -33,7 +33,7 @@ class Person(Base):
     sex = Column(Boolean)
     name = Column(String)
     last_name = Column(String)
-    bitrhday = Column(Date)
+    birthday = Column(Date)
     smoker = Column(Boolean)
     diabet = Column(Boolean)
     weight = Column(Numeric)
@@ -69,8 +69,8 @@ def infarct_prob(p):
     return -0.083 + 0.142 * int(p.smoker) + 0.009 * p.weight + 0.007 * p.pressure_l - 0.010 * p.pulse
 
 # Connect to database
-connectionString = 'postgresql://postgres:1@192.168.129.69:5432/data'
-connectionString = 'sqlite:///hospital.db'
+# connectionString = 'postgresql://postgres:1@192.168.129.69:5432/data'
+connectionString = 'sqlite:///db.sqlite3'
 
 engine = create_engine(connectionString)
 Session = sessionmaker(bind=engine)
@@ -82,7 +82,7 @@ binary = [True, False]
 illnesses = ['ОРЗ', 'ОРВИ', 'Ангина', 'Гепатит', 'Коньюктивит', 'Инсульт']
 
 # Generate people
-for i in range(0, 1000):
+for i in range(0, 100):
     faker = fake.simple_profile()
     fullname = faker['name']
     fullname = fullname.split(' ')

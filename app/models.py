@@ -9,7 +9,7 @@ class Person(models.Model):
     sex = models.BooleanField()
     name = models.CharField(max_length=250)
     last_name = models.CharField(max_length=250)
-    birthdate = models.DateField()
+    birthday = models.DateField()
     smoker = models.BooleanField()
     diabet = models.BooleanField()
     weight = models.FloatField()
