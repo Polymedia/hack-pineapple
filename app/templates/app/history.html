@@ -1,4 +1,5 @@
 ﻿{% extends 'app/layout.html' %}
+{% load staticfiles %}
 
 {% block content %}
     <div class="header-name">
@@ -64,5 +65,65 @@
         <span>Вес</span>
         <span class="h1">{{ person.weight | floatformat:2 }} кг</span>
       </div>
+    </div>
+
+    <div class="container-fluid">
+    <div class="row">
+        <div class="col-md-4">
+            <!--<img src="img/x-ray.svg" width="100%">-->
+            <div id="man-chart" style="width: 100%; height: 500px"></div>
+            <div class="row">
+              <div class="col-md-4 head-info-block">
+                <span>Пульс</span>
+                <span class="h1">{{ person.pulse }}</span>
+              </div>
+            <div class="col-md-4 head-info-block">
+                <span>Операции</span>
+                <span class="h1">{% if person.had_surgery %}Да{% else %}Нет{% endif %}</span>
+              </div>
+            <div class="col-md-4 head-info-block">
+                <span>Давление</span>
+                <span class="h1">{{ person.pressure_h }}/{{ person.pressure_l }}</span>
+              </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            {% for disease in diseases %}
+            <h3 class="text-uppercase">{{ disease.disease }}</h3>
+
+            <div style="border-bottom: 1px solid #c8c8c8;"></div>
+            <p class="text-uppercase">начало лечения {{ disease.start_date | date:"d E Y" }} года</p>
+
+            <div>
+                <div class="text-uppercase block-title">заключение врача
+                    <div style="text-align: right; display: inline-block; float: right;">{{ disease.end_date | date:"d E Y" }}</div>
+                </div>
+            </div>
+            <div class="block-text">Lorem ipsum dolor sit amet, consectetur adipiscing
+                elit. Integer posuere erat a ante>Lorem ipsum dolor
+                sit amet, consectetur adipiscing elit. Integer posuere erat a ante>Lorem ipsum dolor sit amet,
+                consectetur adipiscing elit. Integer posuere erat a ante.
+            </div>
+            <div class="text-uppercase block-title">рецепт врача</div>
+            <div class="block-text">
+                <div>Пенталагин: <span style="color: white">1 таб. каждые 6 часов</span></div>
+                <div>Пенталагин: <span style="color: white">1 таб. каждые 6 часов</span></div>
+                <div>Пенталагин: <span style="color: white">1 таб. каждые 6 часов</span></div>
+            </div>
+            <div class="text-uppercase block-title">анализы</div>
+            <div>
+                <div style="width: 50px; display: inline-block;">
+                    <img src="{% static 'app/img/analiz33-01.svg' %}"/>
+                    <div style="text-align: center">Моча</div>
+                </div>
+                <div style="width: 50px; display: inline-block;">
+                    <img src="{% static 'app/img/analiz334-01.svg' %}"/>
+                    <div style="text-align: center">Кровь</div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
     </div>
 {% endblock %}

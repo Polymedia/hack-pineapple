@@ -30,16 +30,17 @@ class Person(models.Model):
         return current_year - birth_year
 
 
-class Desease(models.Model):
+class Disease(models.Model):
     start_date = models.DateField()
     end_date = models.DateField()
-    id_person = models.ForeignKey(Person)
-    analysis = models.TextField()
-    medicaments = models.TextField()
-    medical_report = models.TextField()
-    desease = models.TextField()
+    id_person = models.ForeignKey(db_column='id_person',
+                                  to=Person)
+    analysis = models.TextField(null=True)
+    medicaments = models.TextField(null=True)
+    medical_report = models.TextField(null=True)
+    disease = models.TextField(null=True)
     chronical = models.BooleanField()
     surgery = models.BooleanField()
 
     class Meta:
-        db_table = 'desease'
+        db_table = 'disease'

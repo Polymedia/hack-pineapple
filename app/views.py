@@ -6,6 +6,7 @@ from django.http import HttpRequest
 from django.template import RequestContext
 from datetime import datetime
 from app.models import Person
+from app.models import Disease
 
 
 def home(request):
@@ -84,7 +85,9 @@ def prediction(request):
 
 def show_patient(request, patient_id):
     person = Person.objects.get(id=patient_id)
-    context = {'person': person}
+    diseases = Disease.objects.filter(id_person=patient_id)
+    context = {'person': person,
+               'diseases': diseases}
     return render(request=request,
                   template_name='app/history.html',
                   context=context)
