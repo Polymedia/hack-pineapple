@@ -20,12 +20,8 @@ MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'pineapple',
-        'USER': 'pineapple',
-        'PASSWORD': 'pineapple',
-        'HOST': '127.0.0.1',
-        'PORT': '5432'
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': path.join(PROJECT_ROOT, 'db.sqlite3')
     }
 }
 
