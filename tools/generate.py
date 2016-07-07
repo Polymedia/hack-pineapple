@@ -80,6 +80,7 @@ Base.metadata.create_all(engine)
 # Values
 binary = [True, False]
 illnesses = ['ОРЗ', 'ОРВИ', 'Ангина', 'Гепатит', 'Коньюктивит', 'Инсульт']
+counter = 0
 
 # Generate people
 for i in range(0, 1000):
@@ -119,6 +120,7 @@ for i in range(0, 1000):
         illness = 'Инфаркт' if pos == j else random.choice(illnesses)
 
         disease = Disease()
+        disease.id = counter
         disease.start_date = last_date + timedelta(days=ds)
         disease.end_date = disease.start_date + timedelta(days=de)
         disease.id_person = person.id
@@ -132,8 +134,6 @@ for i in range(0, 1000):
         #print(disease.__dict__)
         session.add(disease)
 
-    session.commit()
+        counter = counter + 1
 
-'''persons = session.query(Person).all()
-for person in persons:
-    print(person.__dict__)'''
+    session.commit()
