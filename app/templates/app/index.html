@@ -15,9 +15,9 @@
 {#        <input id="tags">#}
 {#    </div>#}
     <div class="row">
-        <ul>
+        <ul id="patients_list">
         {% for person in people %}
-          <li><a href="history/patient/{{ person.id }}">{{ person.id }}: {{ person.last_name }} {{ person.name }}</a></li>
+          <li><span><a href="history/patient/{{ person.id }}">{{ person.last_name }} {{ person.name }}</a></span></li>
         {% endfor %}
         </ul>
     </div>
