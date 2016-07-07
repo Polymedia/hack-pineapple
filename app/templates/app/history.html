@@ -13,27 +13,56 @@
       </div>
       <div class="col-md-1 head-info-block">
         <span>Возраст</span>
-        <span class="h1">21</span>
+        <span class="h1">{{ person.age }}</span>
       </div>
       <div class="col-md-1 head-info-block">
         <span>Дата рождения</span>
         <span class="h1">{{ person.birthday | date:"d E Y" }}</span> {# ДД месяц (в локали) год - https://docs.djangoproject.com/en/1.9/ref/templates/builtins/#date#}
       </div>
       <div class="col-md-1 head-info-block">
-	    <span>Инвалидность</span>
-		<span class="h1">3 степень</span>
+        <span>Инвалидность</span>
+        <span class="h1">3 степень</span>
+          {# TODO Add disability field #}
       </div>
       <div class="col-md-1 head-info-block">
-	    <span>Группа крови</span>
-		<span class="h1">А+</span>
+        <span>Группа крови</span>
+        <span class="h1">
+            {% if person.blood_type == 0 %}
+                Type {{ person.blood_type }}
+            {% endif %}
+            {% if person.blood_type == 1 %}
+                Type {{ person.blood_type }}
+            {% endif %}
+            {% if person.blood_type == 2 %}
+                Type {{ person.blood_type }}
+            {% endif %}
+            {% if person.blood_type == 3 %}
+                Type {{ person.blood_type }}
+            {% endif %}
+            {% if person.blood_type == 4 %}
+                Type {{ person.blood_type }}
+            {% endif %}
+            {% if person.blood_type == 5 %}
+                Type {{ person.blood_type }}
+            {% endif %}
+            {% if person.blood_type == 6 %}
+                Type {{ person.blood_type }}
+            {% endif %}
+        </span>
       </div>
       <div class="col-md-1 head-info-block">
-	    <span>Курение</span>
-		<span class="h1">Да</span>
+        <span>Курение</span>
+        <span class="h1">
+            {% if person.smoker %}
+                Да
+                {% else %}
+                Нет
+            {% endif %}
+        </span>
       </div>
       <div class="col-md-1 head-info-block">
-	    <span>Вес</span>
-		<span class="h1">102 кг.</span>
+        <span>Вес</span>
+        <span class="h1">{{ person.weight | floatformat:2 }} кг</span>
       </div>
     </div>
 {% endblock %}
