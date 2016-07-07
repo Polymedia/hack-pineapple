@@ -5,6 +5,7 @@ from django.shortcuts import render
 from django.http import HttpRequest
 from django.template import RequestContext
 from datetime import datetime
+from app.models import Person
 
 
 def home(request):
@@ -85,3 +86,11 @@ def prediction(request):
 
         })
     )
+
+
+def show_patient(request, patient_id):
+    person = Person.objects.get(id=patient_id)
+    context = {'person': person}
+    return render(request=request,
+                  template_name='app/history.html',
+                  context=context)

@@ -5,13 +5,12 @@
 - avctivate virtual environment. `venv-pineapple\Scripts\activate.bat` - Win OS, `. venv-pineapple/bin/activate` - Linux/MAcOS
 - install requirements. In activated virtual environment do `pip install -r requirements.txt`
 
-## set up database
-- `CREATE DATABASE pineapple;`
-- `CREATE USER pineapple WITH PASSWORD 'pineapple';`
-- `GRANT ALL PRIVILEGES ON DATABASE pineapple TO pineapple;`
-
-## Make migrations
+## Make migrations and migrate
 - in project root dir do `cp tools\makemigrations.py .` and then `python makemigrations.py`
+- migrate structure to DB `python manage.py migrate`
 
 ## Run server
 - in project root dir do `python manage.py runserver 0.0.0.0:80`
+
+## Open app
+- open app in browser [http://127.0.0.1]

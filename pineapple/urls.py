@@ -37,6 +37,9 @@ urlpatterns = patterns('',
 
     url(r'^history', 'app.views.history', name='history'),
     url(r'^prediction', 'app.views.prediction', name='prediction'),
+    url(r'^history/patient/(?P<patient_id>[0-9]+)',
+        view='app.views.show_patient',
+        name='patient_history')
 
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),

@@ -19,6 +19,9 @@ class Person(models.Model):
     had_surgery = models.BooleanField()
     blood_type = models.IntegerField()
 
+    class Meta:
+        db_table = 'person'
+
 
 class Desease(models.Model):
     start_date = models.DateField()
@@ -31,3 +34,5 @@ class Desease(models.Model):
     chronical = models.BooleanField()
     surgery = models.BooleanField()
 
+    class Meta:
+        db_table = 'desease'
