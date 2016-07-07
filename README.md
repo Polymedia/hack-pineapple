@@ -8,10 +8,10 @@
 ## set up database
 - `CREATE DATABASE pineapple;`
 - `CREATE USER pineapple WITH PASSWORD 'pineapple';`
-- `GRANT ALL PRIVILEGES ON pineapple TO pineapple;`
+- `GRANT ALL PRIVILEGES ON DATABASE pineapple TO pineapple;`
 
 ## Make migrations
-- in project root dir do `python makemigrations.py`
+- in project root dir do `cp tools\makemigrations.py .` and then `python makemigrations.py`
 
 ## Run server
 - in project root dir do `python manage.py runserver 0.0.0.0:80`
