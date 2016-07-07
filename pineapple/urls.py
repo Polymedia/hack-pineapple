@@ -14,26 +14,26 @@ from app.forms import BootstrapAuthenticationForm
 urlpatterns = patterns('',
     # Examples:
     url(r'^$', 'app.views.home', name='home'),
-    url(r'^contact$', 'app.views.contact', name='contact'),
-    url(r'^about', 'app.views.about', name='about'),
-    url(r'^login/$',
-        'django.contrib.auth.views.login',
-        {
-            'template_name': 'app/login.html',
-            'authentication_form': BootstrapAuthenticationForm,
-            'extra_context':
-            {
-                'title':'Log in',
-                'year':datetime.now().year,
-            }
-        },
-        name='login'),
-    url(r'^logout$',
-        'django.contrib.auth.views.logout',
-        {
-            'next_page': '/',
-        },
-        name='logout'),
+    # url(r'^contact$', 'app.views.contact', name='contact'),
+    # url(r'^about', 'app.views.about', name='about'),
+    # url(r'^login/$',
+    #     'django.contrib.auth.views.login',
+    #     {
+    #         'template_name': 'app/login.html',
+    #         'authentication_form': BootstrapAuthenticationForm,
+    #         'extra_context':
+    #         {
+    #             'title':'Log in',
+    #             'year':datetime.now().year,
+    #         }
+    #     },
+    #     name='login'),
+    # url(r'^logout$',
+    #     'django.contrib.auth.views.logout',
+    #     {
+    #         'next_page': '/',
+    #     },
+    #     name='logout'),
 
     url(r'^history', 'app.views.history', name='history'),
     url(r'^prediction', 'app.views.prediction', name='prediction'),
