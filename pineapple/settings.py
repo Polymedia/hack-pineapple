@@ -38,7 +38,7 @@ TIME_ZONE = 'Europe/Moscow'
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ru-RU'
 
 SITE_ID = 1
 
@@ -112,12 +112,21 @@ ROOT_URLCONF = 'pineapple.urls'
 # Python dotted path to the WSGI application used by Django's runserver.
 WSGI_APPLICATION = 'pineapple.wsgi.application'
 
-TEMPLATE_DIRS = (
-    # Put strings here, like "/home/html/django_templates" or
-    # "C:/www/django/templates".
-    # Always use forward slashes, even on Windows.
-    # Don't forget to use absolute paths, not relative paths.
-)
+
+TEMPLATES = {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [path.join(PROJECT_ROOT, 'app', 'templates')]
+        ,
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+            ],
+        },
+    },
 
 INSTALLED_APPS = (
     'django.contrib.auth',

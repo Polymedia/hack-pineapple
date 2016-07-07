@@ -1,7 +1,7 @@
 """
 Definition of views.
 """
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpRequest
 from django.template import RequestContext
 from datetime import datetime
@@ -11,14 +11,15 @@ from app.models import Person
 def home(request):
     """Renders the home page."""
     assert isinstance(request, HttpRequest)
+    people = Person.objects.all()
     return render(
         request,
         'app/index.html',
         context_instance = RequestContext(request,
-        {
-            'title':'Home Page',
-            'year':datetime.now().year,
-        })
+                                          {'title': 'Home Page',
+                                           'people': people
+                                           }
+                                          )
     )
 
 
@@ -49,31 +50,24 @@ def home(request):
 #     )
 
 
-def about(request):
-    """Renders the about page."""
-    assert isinstance(request, HttpRequest)
-    return render(
-        request,
-        'app/about.html',
-        context_instance = RequestContext(request,
-        {
-            'title':'About',
-            'message':'Your application description page.',
-            'year':datetime.now().year,
-        })
-    )
+# def about(request):
+#     """Renders the about page."""
+#     assert isinstance(request, HttpRequest)
+#     return render(
+#         request,
+#         'app/about.html',
+#         context_instance = RequestContext(request,
+#         {
+#             'title':'About',
+#             'message':'Your application description page.',
+#             'year':datetime.now().year,
+#         })
+#     )
 
 
 def history(request):
     assert isinstance(request, HttpRequest)
-    return render(
-        request,
-        'app/history.html',
-        context_instance = RequestContext(request,
-        {
-
-        })
-    )
+    return redirect('/')
 
 
 def prediction(request):

@@ -35,7 +35,7 @@ urlpatterns = patterns('',
     #     },
     #     name='logout'),
 
-    url(r'^history', 'app.views.history', name='history'),
+    url(r'^history$', 'app.views.history', name='history'),
     url(r'^prediction', 'app.views.prediction', name='prediction'),
     url(r'^history/patient/(?P<patient_id>[0-9]+)',
         view='app.views.show_patient',
