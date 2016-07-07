@@ -35,6 +35,9 @@ urlpatterns = patterns('',
         },
         name='logout'),
 
+    url(r'^history', 'app.views.history', name='history'),
+    url(r'^prediction', 'app.views.prediction', name='prediction'),
+
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 

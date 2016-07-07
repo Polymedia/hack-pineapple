@@ -47,3 +47,25 @@ def about(request):
             'year':datetime.now().year,
         })
     )
+
+def history(request):
+    assert isinstance(request, HttpRequest)
+    return render(
+        request,
+        'app/history.html',
+        context_instance = RequestContext(request,
+        {
+
+        })
+    )
+
+def prediction(request):
+    assert isinstance(request, HttpRequest)
+    return render(
+        request,
+        'app/prediction.html',
+        context_instance = RequestContext(request,
+        {
+
+        })
+    )
