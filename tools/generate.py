@@ -69,8 +69,8 @@ def infarct_prob(p):
     return -0.083 + 0.142 * int(p.smoker) + 0.009 * p.weight + 0.007 * p.pressure_l - 0.010 * p.pulse
 
 # Connect to database
-# connectionString = 'postgresql://postgres:1@192.168.129.69:5432/data'
-connectionString = 'sqlite:///db.sqlite3'
+#connectionString = 'postgresql://postgres:1@192.168.129.69:5432/data'
+connectionString = 'sqlite:///hospital.db'
 
 engine = create_engine(connectionString)
 Session = sessionmaker(bind=engine)
@@ -92,7 +92,7 @@ for i in range(0, 100):
     person.sex = True if faker["sex"] == 'M' else False
     person.name = fullname[1]
     person.last_name = fullname[0]
-    person.birthdate = datetime.strptime(faker['birthdate'], '%Y-%M-%d')
+    person.birthday = datetime.strptime(faker['birthdate'], '%Y-%M-%d')
     person.smoker = random.choice(binary)
     person.diabet = random.choice(binary)
     person.weight = random.uniform(40.0, 150.0)
@@ -107,8 +107,8 @@ for i in range(0, 100):
 
     prob = infarct_prob(person)
     osm = random.randrange(3, 15)
-    pos = random.randrange(0, osm) if prob > 0.8 else -1
-    last_date = random_date(person.birthdate, datetime.now())
+    pos = random.randrange(0, osm) if prob > 0.5 else -1
+    last_date = random_date(person.birthday, datetime.now())
 
     #print(prob)
 

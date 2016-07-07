@@ -1,6 +1,54 @@
 ﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
+    height: 1080px;
+    width: 1820px;
+    background-color: #000000;
+
+    padding: 50px;
+
+    color: #999999;
+    font-family: "PF Agora Sans Pro Light", sans-serif;
+    font-size: 16px;
+    font-style: normal;
+    font-variant: small-caps;
+    font-weight: 300;
+    text-transform: uppercase;
+}
+
+span.h1 {
+    display: block;
+    color: #ffffff;
+    font-family: "Bebas Neue Regular", sans-serif;
+    font-size: 22px;
+    font-style: normal;
+    font-weight: normal;
+}
+
+span.h2 {
+    display: block;
+    color: #999999;
+    font-family: "PF Agora Sans Pro Light", sans-serif;
+    font-size: 18px;
+    font-style: normal;
+    font-variant: small-caps;
+    font-weight: 300;
+    text-transform: none;
+}
+
+.header-name {
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    padding: 15px 0 5px 0;
+}
+
+.head-info-block{
+    width: auto;
+    margin-top: 20px;
+    text-align: center;
+    border-right: 1px solid #ccc;
+}
+
+.row {
+    margin: auto;
 }
 
 /* Set padding to keep content from hitting the edges */
