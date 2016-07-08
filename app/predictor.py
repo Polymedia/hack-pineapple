@@ -1,7 +1,6 @@
 import sqlite3
 import pandas as pd
-from sklearn.linear_model import LinearRegression
-
+from sklearn.ensemble import RandomForestClassifier
 class Predictor:
     def __init__(self, path):
         self.connection = sqlite3.connect(path)
@@ -15,14 +14,14 @@ class Predictor:
 
     def probability(self, person):
         values = [getattr(person, f, None) for f in self.factors]
-        return self.model.predict(values)[0] * 100
+        return self.model.predict_proba(values)[0][1] * 100
 
     def probabilities(self, person, factor, values):
         probs = []
         for value in values:
             setattr(person, factor, value)
             pvalues = [getattr(person, f, None) for f in self.factors]
-            prob = self.model.predict(pvalues)[0] * 100
+            prob = self.model.predict_proba(pvalues)[0][1] * 100
             probs.append(prob)
         return probs
 
@@ -59,7 +58,7 @@ class Predictor:
         for name in autocorr:
             del data[name]
 
-        model = LinearRegression()
+        model = RandomForestClassifier(n_estimators=100, max_features='sqrt')
         model.fit(data, values)
 
         return data.columns, model
