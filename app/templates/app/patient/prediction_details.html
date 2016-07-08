@@ -1,4 +1,5 @@
 {% extends 'app/patient/history.html' %}
+{% load staticfiles %}
 
 {% block info %}
     <div class="col-md-5">
@@ -106,11 +107,28 @@
     });
 });
         </script>
+        <script>
+            $(document).ready(function () {
+                var isSmokeEnabled = false;
+           $("#smoke-btn").click(function () {
+               if (isSmokeEnabled) {
+                   isSmokeEnabled = false;
+                   $(this).css({"background": "url({% static 'app/img/nosmoke-01.svg' %}) no-repeat"});
+               } else {
+                   isSmokeEnabled = true;
+                   $(this).css({"background": "url({% static 'app/img/smoke-01.svg' %}) no-repeat"});
+               }
+           })
+            })
+
+
+        </script>
 
     <div id="main-chart" style="width: 100%; height: 500px"></div>
     </div>
     <div class="col-md-5">
-        <button type="button" class="btn btn-lg btn-primary" id="smoke-btn">Учесть курение</button>
-        <button type="button" class="btn btn-lg btn-primary" id="weight-btn">Посчитать прогноз для веса</button>
+
+        <div id="smoke-btn" style="width: 100px; height: 100px; background: url({% static 'app/img/nosmoke-01.svg' %}) no-repeat;cursor: pointer"></div>
+{#        <button type="button" class="btn btn-lg btn-primary" id="weight-btn">Посчитать прогноз для веса</button>#}
     </div>
 {% endblock %}
