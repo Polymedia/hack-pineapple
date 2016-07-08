@@ -14,26 +14,32 @@ class Predictor:
         return self.factors
 
     def probability(self, person):
-        values = [person.__dict__[f] for f in self.factors]
-        return self.model.predict(values)[0]
+        values = [getattr(person, f, None) for f in self.factors]
+        return self.model.predict(values)[0] * 100
 
     def probabilities(self, person, factor, values):
-        return list((1, 2, 3))
+        probs = []
+        for value in values:
+            setattr(person, factor, value)
+            pvalues = [getattr(person, f, None) for f in self.factors]
+            prob = self.model.predict(pvalues)[0] * 100
+            probs.append(prob)
+        return probs
 
     def _model(self, disease='Инфаркт'):
         persons = self.cursor.execute('''
-        with  dis as
+        with dis as
         (select id_person, disease from disease group by id_person having disease=?
         union
         select id_person, disease from disease group by id_person having disease!=?)
 
-
-        SELECT smoker,diabet,weight,pressure_l,pressure_h,pulse,disease FROM person
+        SELECT (strftime('%Y', 'now') - strftime('%Y', birthday)), 
+        smoker, diabet, weight, pressure_l, pressure_h, pulse, disease FROM person
         join dis on dis.id_person = person.id
         ''',(disease, disease)).fetchall()
 
         data = pd.DataFrame(persons)
-        data.columns = ['smoker', 'diabet', 'weight', 'pressure_l', 'pressure_h', 'pulse', 'disease']
+        data.columns = ['age', 'smoker', 'diabet', 'weight', 'pressure_l', 'pressure_h', 'pulse', 'disease']
         values = [1 if x == 'Инфаркт' else 0 for x in data['disease']]
         data = data.ix[:,:-1]
         # sqlite3 has no decimap support
