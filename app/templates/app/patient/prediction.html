@@ -2,7 +2,7 @@
 
 {% block info %}
 	{% for disease, prediction in predictions.items %}
-	<div class="col-md-5" style="border: 1px solid #ccc; padding: 15px;">
+	<div class="col-md-4" style="border: 1px solid #ccc; padding: 15px;">
         <span class="h1 big white" style="float: right; padding-right: 15px; padding-top: 8px; font-size: 30px"><a href="/history/patient/{{ person.id }}/prediction/1">{{prediction|floatformat}}%</a></span>
 
 		<span class="h1">{{disease}}</span>
@@ -10,5 +10,6 @@
 
 
 	</div>
+    <div class="col-md-5"></div>
 	{% endfor %}
 {% endblock %}
