@@ -38,6 +38,7 @@ span.h2 {
     border-top: 1px solid #ccc;
     border-bottom: 1px solid #ccc;
     padding: 15px 0 5px 0;
+    margin-left: 15px;
 }
 
 .head-info-block{
@@ -47,8 +48,8 @@ span.h2 {
     border-right: 1px solid #ccc;
 }
 
-.row {
-    margin: auto;
+#man-chart {
+    margin: -10px;
 }
 
 /* Set padding to keep content from hitting the edges */

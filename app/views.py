@@ -56,6 +56,7 @@ def show_patient_prediction(request, patient_id):
                   template_name='app/patient/prediction.html',
                   context=context)
 
+
 def show_patient_prediction_details(request,
                                     patient_id,
                                     prediction_path):
