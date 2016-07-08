@@ -38,6 +38,9 @@
     <Compile Include="pineapple\settings.py" />
     <Compile Include="pineapple\urls.py" />
     <Compile Include="pineapple\wsgi.py" />
+    <Compile Include="tools\generate.py" />
+    <Compile Include="tools\makemigrations.py" />
+    <Compile Include="tools\tables.py" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="app\" />
@@ -50,6 +53,7 @@
     <Folder Include="app\templates\app\" />
     <Folder Include="app\templates\app\patient\" />
     <Folder Include="pineapple\" />
+    <Folder Include="tools\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="app\templates\app\patient\body.html" />
