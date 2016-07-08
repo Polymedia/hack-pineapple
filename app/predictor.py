@@ -4,6 +4,7 @@ from sklearn.linear_model import LogisticRegression
 
 class Predictor:
     def __init__(self, path):
+        self.path = path
         self.connection = sqlite3.connect(path)
         self.cursor = self.connection.cursor()
         factors, model = self._model()
@@ -14,35 +15,49 @@ class Predictor:
         return self.factors
 
     def probability(self, person):
+        disease = self._disease(person)
         values = [getattr(person, f, None) for f in self.factors]
+        values[len(values) - 1] = 1 if disease else 0
         return self.model.predict_proba(values)[0][1] * 100
 
     def probabilities(self, person, factor, values):
+        disease = self._disease(person)
         probs = []
         for value in values:
+            print(values)
             setattr(person, factor, value)
             pvalues = [getattr(person, f, None) for f in self.factors]
+            pvalues[len(pvalues) - 1] = 1 if disease else 0
             prob = self.model.predict_proba(pvalues)[0][1] * 100
             probs.append(prob)
         return probs
 
+    def _disease(self, person):
+        conn = sqlite3.connect(self.path)
+        cursor = conn.cursor()
+        disease = cursor.execute('''select count(person.id) from disease
+            inner join person on person.id = disease.id_person
+            where person.id = ? and disease.disease ="Гепатит"
+            group by person.id''', (person.id,)).fetchall()
+        return disease
+
     def _model(self, disease='Инфаркт'):
-        persons = self.cursor.execute('''
-        with dis as
-        (select id_person, disease from disease group by id_person having disease=?
-        union
-        select id_person, disease from disease group by id_person having disease!=?)
+        persons = self.cursor.execute(
+            '''select person.id,(strftime('%Y', 'now') - strftime('%Y', birthday)), smoker,diabet, weight,pressure_l,pressure_h,pulse FROM person''').fetchall()
+        static_factors = ['id', 'age', 'smoker', 'diabet', 'weight', 'pressure_l', 'pressure_h', 'pulse']
+        diseases = self.cursor.execute('''SELECT DISTINCT disease from disease''').fetchall()
+        diseases = list(map(lambda x: x[0], diseases))
+        data = pd.DataFrame(persons, columns=static_factors)
 
-        SELECT (strftime('%Y', 'now') - strftime('%Y', birthday)), 
-        smoker, diabet, weight, pressure_l, pressure_h, pulse, disease FROM person
-        join dis on dis.id_person = person.id
-        ''',(disease, disease)).fetchall()
+        for key in diseases:
+            series = self.cursor.execute('''select person.id, case when disease.disease = ? then 1 else 0 end from disease
+        inner join person on person.id = disease.id_person
+        group by disease.id_person''', (key,)).fetchall()
+            series = pd.Series(map(lambda x: x[1], series))
+            if key in (disease, "Гепатит"): data[key] = series
 
-        data = pd.DataFrame(persons)
-        data.columns = ['age', 'smoker', 'diabet', 'weight', 'pressure_l', 'pressure_h', 'pulse', 'disease']
-        values = [1 if x == 'Инфаркт' else 0 for x in data['disease']]
-        data = data.ix[:,:-1]
-        # sqlite3 has no decimap support
+        values = data[disease]
+        del data[disease]
         data['pulse'] = pd.to_numeric(data['pulse'])
         data['weight'] = pd.to_numeric(data['weight'])
 
