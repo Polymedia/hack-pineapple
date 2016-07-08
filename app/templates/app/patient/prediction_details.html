@@ -101,7 +101,12 @@
             $(document).ready(function () {
                 var containerID = '#main-chart';
                 var chart = $(containerID).highcharts();
-                var isSmokeEnabled = false;
+				{% if person.smoker %}
+                var isSmokeEnabled = true;
+				{% else %}
+				var isSmokeEnabled = false;
+				{% endif %}
+
                 $("#smoke-btn").click(function () {
                     if (isSmokeEnabled) {
                         chart.series[0].setData([7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6]);
@@ -113,6 +118,7 @@
                         $(this).css({"background": "url({% static 'app/img/smoke-01.svg' %}) no-repeat"});
                     }
                 });
+
                 $("#weight-btn").click(function () {
                     $(".switch-btn").css({"border": "0"});
                     $(this).css({"border": "1px solid #27AE60 "});
@@ -144,8 +150,13 @@
     </div>
     <div class="col-md-5">
 
+		{% if person.smoker %}
         <div id="smoke-btn"
+             style="display: inline-block; width: 100px; height: 100px; background: url({% static 'app/img/smoke-01.svg' %}) no-repeat;cursor: pointer"></div>
+		{% else %}
+		<div id="smoke-btn"
              style="display: inline-block; width: 100px; height: 100px; background: url({% static 'app/img/nosmoke-01.svg' %}) no-repeat;cursor: pointer"></div>
+		{% endif %}
         <div id="weight-btn" class="switch-btn"
              style="display: inline-block; width: 100px; height: 100px; background: url({% static 'app/img/emoes-01.svg' %}) no-repeat; cursor: pointer; border: 1px solid #27AE60 "></div>
         <div id="age-btn" class="switch-btn"
