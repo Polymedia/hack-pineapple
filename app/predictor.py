@@ -1,6 +1,7 @@
 import sqlite3
 import pandas as pd
-from sklearn.ensemble import RandomForestClassifier
+from sklearn.linear_model import LogisticRegression
+
 class Predictor:
     def __init__(self, path):
         self.connection = sqlite3.connect(path)
@@ -58,7 +59,7 @@ class Predictor:
         for name in autocorr:
             del data[name]
 
-        model = RandomForestClassifier(n_estimators=100, max_features='sqrt')
+        model = LogisticRegression() #n_estimators=100, max_features='sqrt'
         model.fit(data, values)
 
         return data.columns, model
