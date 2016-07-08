@@ -1,20 +1,15 @@
 {% extends 'app/patient/history.html' %}
 
 {% block info %}
-    <div class="col-md-5" >
-        <span class="spacer10"></span>
-    </div>
-	<div class="col-md-5">
-		<span class="h1">Вероятность возникновения заболевания</span>
-	</div>
 	{% for disease, prediction in predictions.items %}
-	<div class="col-md-5">
-		<div class="col-md-4">
-			<span class="h4">{{disease}}</span>
-		</div>
-		<div class="class-md-1">
-			<span class="h1 big white"><a href="/history/patient/{{ person.id }}/prediction/details">{{prediction|floatformat}}%</a></span>
-		</div>
+	<div class="col-md-4" style="border: 1px solid #ccc; padding: 15px;">
+        <span class="h1 big white" style="float: right; padding-right: 15px; padding-top: 8px; font-size: 30px"><a href="/history/patient/{{ person.id }}/prediction/details">{{prediction|floatformat}}%</a></span>
+
+		<span class="h1">{{disease}}</span>
+        <span>Требуется полное мед. обследование</span>
+
+
 	</div>
+    <div class="col-md-5"></div>
 	{% endfor %}
 {% endblock %}
