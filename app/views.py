@@ -61,6 +61,7 @@ def show_patient_prediction_details(request,
                                     patient_id):
     person = Person.objects.get(id=patient_id)
     diseases = Disease.objects.filter(id_person=patient_id).order_by('start_date')
+    person_initial = deepcopy(person)
 
     keys_age = [35, 37, 39, 41, 43, 45, 47, 49, 51, 53, 55, 57, 59, 61]
     predictions_age = {
@@ -81,7 +82,7 @@ def show_patient_prediction_details(request,
     predictions_weight['values_s'] = predictor.probabilities(deepcopy(person), 'weight', keys_weight)
 
     context = {
-        'person': person,
+        'person': person_initial,
         'diseases': diseases,
         'predictions_age': predictions_age,
         'predictions_weight': predictions_weight
