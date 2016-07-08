@@ -107,45 +107,63 @@
             var isSmokeEnabled = false;
             {% endif %}
 
-            $("#smoke-btn").click(function () {
-                if (isSmokeEnabled) {
-                    chart.series[0].setData({{predictions_weight.values_s}});
-                    isSmokeEnabled = false;
-                    $(this).css({"background": "url({% static 'app/img/nosmoke-01.svg' %}) no-repeat"});
-                } else {
-                    chart.series[0].setData({{predictions_weight.values}});
-                    isSmokeEnabled = true;
-                    $(this).css({"background": "url({% static 'app/img/smoke-01.svg' %}) no-repeat"});
-                }
-            });
+		    function set_age() {
+		        chart.xAxis[0].setCategories({{predictions_age.labels|safe}});
+                chart.xAxis[0].axisTitle.attr({
+                    text: 'Возраст'
+                });
+                setTimeout(function () {
+		            if (isSmokeEnabled)
+						chart.series[0].setData({{predictions_age.values_s}});
+		            else
+                        chart.series[0].setData({{predictions_age.values}});
+                }, 500);
+		    }
 
-            $("#weight-btn").click(function () {
-                switchBtn(this);
+            function set_weight() {
                 chart.xAxis[0].setCategories({{predictions_weight.labels|safe}});
                 chart.xAxis[0].axisTitle.attr({
                     text: 'Вес'
                 });
                 setTimeout(function () {
+                    if (isSmokeEnabled)
+						chart.series[0].setData({{predictions_weight.values_s}});
+		            else
                         chart.series[0].setData({{predictions_weight.values}});
                 }, 500);
+            }
+
+            $("#smoke-btn").click(function () {
+                if (isSmokeEnabled) {
+                    isSmokeEnabled = false;
+                    $(this).css({"background": "url({% static 'app/img/nosmoke-01.svg' %}) no-repeat"});
+                } else {
+                    isSmokeEnabled = true;
+                    $(this).css({"background": "url({% static 'app/img/smoke-01.svg' %}) no-repeat"});
+                }
+                var id = $('.switch-btn.checked')[0].id;
+                if (id == 'age-btn')
+                    set_age();
+                if (id == 'weight-btn')
+                    set_weight();
+            });
+
+            $("#weight-btn").click(function () {
+                switchBtn(this);
+                set_weight()
             });
 
             $("#age-btn").click(function () {
                 switchBtn(this);
-                chart.xAxis[0].setCategories({{predictions_age.labels|safe}});
-                chart.xAxis[0].axisTitle.attr({
-                    text: 'Возраст'
-                });
-                setTimeout(function () {
-                        chart.series[0].setData({{predictions_age.values}});
-                }, 500);
+                set_age()
             });
 
             function switchBtn(checkedBtn) {
                 $(".switch-btn").css({"border": "1px solid #999999"});
+                $(".switch-btn").removeClass("checked");
                 $(checkedBtn).css({"border": "1px solid #27AE60"});
+                $(checkedBtn).addClass("checked");
             }
-
         });
 
     </script>
@@ -161,10 +179,9 @@
         <div id="smoke-btn"
             style="background: url({% static 'app/img/nosmoke-01.svg' %}) no-repeat;"></div>
         {% endif %}
-    <div id="weight-btn" class="switch-btn"
-         style="border: 1px solid #27AE60">ВЕС
+    <div id="weight-btn" class="switch-btn">ВЕС
     </div>
-    <div id="age-btn" class="switch-btn">ВОЗРАСТ</div>
+    <div id="age-btn" class="switch-btn checked" style="border: 1px solid #27AE60">ВОЗРАСТ</div>
     <a id="disease-btn" href="/history/patient/{{person.id}}" class="switch-btn">Болезни</a>
 </div>
 {% endblock %}
