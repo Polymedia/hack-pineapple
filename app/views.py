@@ -36,7 +36,7 @@ def show_patient_info(request, patient_id):
     person = Person.objects.get(id=patient_id)
     diseases = Disease.objects.filter(id_person=patient_id).order_by('start_date')
     context = {'person': person,
-               'diseases': diseases}
+               'disease': diseases[0]}
     return render(request=request,
                   template_name='app/patient/info.html',
                   context=context)
