@@ -16,7 +16,7 @@ urlpatterns = [
         view=app.views.show_patient_prediction,
         name='patient_diseases_prediction'),
     url(r'^history/patient/(?P<patient_id>[0-9]+)/prediction'
-        r'/(?P<prediction_path>detailes)',
+        r'/details',
         view=app.views.show_patient_prediction_details,
         name='patient_diseases_prediction_details')
 ]
