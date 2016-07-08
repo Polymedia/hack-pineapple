@@ -1,0 +1,237 @@
+{% extends 'app/patient/history.html' %}
+{% load staticfiles %}
+
+{% block info %}
+<div class="col-md-5">
+    <span class="h1 big white">Прогноз инфаркта</span>
+</div>
+<div class="col-md-5">
+    <script>
+        $(function () {
+            var containerID = '#main-chart';
+
+            $(containerID).highcharts({
+                chart: {
+                    type: "spline",
+                    backgroundColor: "#000000"
+                },
+                credits: {enabled: false},
+                exporting: {enabled: false},
+                title: {
+                    text: null
+                },
+                subtitle: {
+                    text: null
+                },
+                xAxis: {
+                    tickmarkPlacement: 'on',
+                    gridLineColor: "#999999",
+                    gridLineWidth: 1,
+                    lineWidth: 0,
+                    gridLineDashStyle: 'ShortDot',
+                    title: {
+                        text: "Возраст",
+                        style: {
+                            fontSize: "14px",
+                            fontFamily: "Arial",
+                            color: "#999999"
+                        }
+                    },
+<<<<<<< HEAD
+                    categories: ["35", "37", "39", "41", "43", "45", "47", "49", "51", "53", "55", "57", "59", "61"],
+                    labels: {
+                        style: {
+                            fontSize: "14px",
+                            fontFamily: "Arial",
+                            color: "#999999"
+=======
+                    xAxis: {
+                        tickmarkPlacement: 'on',
+                        gridLineColor: "#999999",
+                        gridLineWidth: 1,
+                        lineWidth: 0,
+                        gridLineDashStyle: 'ShortDot',
+                        title: {
+                            text: "Возраст",
+                            style: {
+                                fontSize: "14px",
+                                fontFamily: "Arial",
+                                color: "#999999"
+                            }
+                        },
+                        categories: {{predictions_age.labels|safe}},
+                        labels: {
+                            style: {
+                                fontSize: "14px",
+                                fontFamily: "Arial",
+                                color: "#999999"
+                            }
+>>>>>>> 36594ba921f99864efe39bfc705853f407ac6c57
+                        }
+                    }
+                },
+                yAxis: {
+                    lineWidth: 0,
+                    gridLineWidth: 1,
+                    gridLineColor: "#999999",
+                    gridLineDashStyle: 'ShortDot',
+                    title: {
+                        text: null
+                    },
+                    labels: {
+                        formatter: function () {
+                            return this.value + "%";
+                        },
+                        style: {
+                            fontSize: "14px",
+                            fontFamily: "Arial",
+                            color: "#999999"
+                        }
+                    }
+                },
+                legend: {
+                    enabled: false
+                },
+
+                plotOptions: {
+                    spline: {
+                        lineWidth: 4,
+                        marker: {
+                            enabled: false
+                        }
+<<<<<<< HEAD
+=======
+                    },
+                    tooltip: {
+                        crosshairs: true,
+                        valueSuffix: '%'
+                    },
+                    series: [{
+                        name: ' ',
+                        data: {{predictions_age.values}},
+                        color: "#810000"
+>>>>>>> 36594ba921f99864efe39bfc705853f407ac6c57
+                    }
+                },
+                tooltip: {
+                    crosshairs: true,
+                    valueSuffix: '%'
+                },
+                series: [{
+                    name: ' ',
+                    data: [7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6],
+                    color: "#810000"
+                }
+                ]
+            });
+
+
+            $("#weight-btn").click(function () {
+                var chart = $(containerID).highcharts();
+
+
+            });
+<<<<<<< HEAD
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+            var containerID = '#main-chart';
+            var chart = $(containerID).highcharts();
+            var isSmokeEnabled = false;
+            $("#smoke-btn").click(function () {
+                if (isSmokeEnabled) {
+                    chart.series[0].setData([7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6]);
+                    isSmokeEnabled = false;
+                    $(this).css({"background": "url({% static 'app/img/nosmoke-01.svg' %}) no-repeat"});
+                } else {
+                    chart.series[0].setData([10.0, 12.9, 1.5, 15.5, 8.2, 1.5, 5.2, 6.5, 53.3, 15.3, 23.9, 4.6]);
+                    isSmokeEnabled = true;
+                    $(this).css({"background": "url({% static 'app/img/smoke-01.svg' %}) no-repeat"});
+                }
+            });
+            $("#weight-btn").click(function () {
+                switchBtn(this);
+                chart.xAxis[0].setCategories(["87", "89", "91", "93", "95", "97", "99", "101", "103", "105", "107", "109", "111", "113"]);
+                chart.xAxis[0].axisTitle.attr({
+                    text: 'Вес'
+=======
+        </script>
+        <script>
+            $(document).ready(function () {
+                var containerID = '#main-chart';
+                var chart = $(containerID).highcharts();
+                var isSmokeEnabled = false;
+                $("#smoke-btn").click(function () {
+                    if (isSmokeEnabled) {
+                        chart.series[0].setData([7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6]);
+                        isSmokeEnabled = false;
+                        $(this).css({"background": "url({% static 'app/img/nosmoke-01.svg' %}) no-repeat"});
+                    } else {
+                        chart.series[0].setData([10.0, 12.9, 1.5, 15.5, 8.2, 1.5, 5.2, 6.5, 53.3, 15.3, 23.9, 4.6]);
+                        isSmokeEnabled = true;
+                        $(this).css({"background": "url({% static 'app/img/smoke-01.svg' %}) no-repeat"});
+                    }
+                });
+                $("#weight-btn").click(function () {
+                    $(".switch-btn").css({"border": "0"});
+                    $(this).css({"border": "1px solid #27AE60 "});
+                    chart.xAxis[0].setCategories({{predictions_weight.labels|safe}});
+                    chart.xAxis[0].axisTitle.attr({
+                        text: 'Вес'
+                    });
+                    setTimeout(function () {
+                        chart.series[0].setData({{predictions_weight.values}});
+                    }, 500);
+>>>>>>> 36594ba921f99864efe39bfc705853f407ac6c57
+                });
+                setTimeout(function () {
+                    chart.series[0].setData([40.0, 22.9, 12.5, 45.5, 12.2, 5.5, 23.2, 2.5, 3.3, 45.3, 63.9, 1.6]);
+                }, 500);
+            });
+
+<<<<<<< HEAD
+            $("#age-btn").click(function () {
+                switchBtn(this);
+                chart.xAxis[0].setCategories(["35", "37", "39", "41", "43", "45", "47", "49", "51", "53", "55", "57", "59", "61"]);
+                chart.xAxis[0].axisTitle.attr({
+                    text: 'Возраст'
+=======
+                $("#age-btn").click(function () {
+                    $(".switch-btn").css({"border": "0"});
+                    $(this).css({"border": "1px solid #27AE60 "});
+                    chart.xAxis[0].setCategories({{predictions_age.labels|safe}});
+                    chart.xAxis[0].axisTitle.attr({
+                        text: 'Возраст'
+                    });
+                    setTimeout(function () {
+                        chart.series[0].setData({{predictions_age.values}});
+                    }, 500);
+>>>>>>> 36594ba921f99864efe39bfc705853f407ac6c57
+                });
+                setTimeout(function () {
+                    chart.series[0].setData([30.0, 22.9, 2.5, 15.5, 12.2, 56.5, 23.2, 42.5, 3.3, 15.3, 63.9, 1.6]);
+                }, 500);
+            });
+
+            function switchBtn(checkedBtn) {
+                $(".switch-btn").css({"border": "1px solid #999999"});
+                $(checkedBtn).css({"border": "1px solid #27AE60"});
+            }
+
+        });
+
+    </script>
+
+    <div id="main-chart" style="width: 100%; height: 500px"></div>
+</div>
+<div class="col-md-5">
+
+    <div id="smoke-btn"
+         style="background: url({% static 'app/img/nosmoke-01.svg' %}) no-repeat;"></div>
+    <div id="weight-btn" class="switch-btn"
+         style="border: 1px solid #27AE60">ВЕС
+    </div>
+    <div id="age-btn" class="switch-btn" style="border: 1px solid #999999">ВОЗРАСТ</div>
+</div>
+{% endblock %}
