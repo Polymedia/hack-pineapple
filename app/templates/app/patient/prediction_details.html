@@ -5,130 +5,150 @@
     <div class="col-md-5">
         <span class="h1 big white">Прогноз инфаркта</span>
     </div>
-    <div class="col-md-5" >
+    <div class="col-md-5">
         <script>
             $(function () {
-    var containerID = '#main-chart';
+                var containerID = '#main-chart';
 
-    $(containerID).highcharts({
-        chart: {
-            type: "spline",
-            backgroundColor: "#000000"
-        },
-        credits: {enabled: false},
-        exporting: {enabled: false},
-        title: {
-            text: null
-        },
-        subtitle: {
-            text: null
-        },
-        xAxis: {
-            tickmarkPlacement: 'on',
-            gridLineColor: "#999999",
-            gridLineWidth: 1,
-            lineWidth: 0,
-            gridLineDashStyle: 'ShortDot',
-            title: {
-                text: "Возраст",
-                style: {
-                    fontSize: "14px",
-                    fontFamily: "Arial",
-                    color: "#999999"
-                }
-            },
-            categories: ["35", "37", "39", "41", "43", "45", "47", "49", "51", "53", "55", "57", "59", "61"],
-            labels: {
-                style: {
-                    fontSize: "14px",
-                    fontFamily: "Arial",
-                    color: "#999999"
-                }
-            }
-        },
-        yAxis: {
-            lineWidth: 0,
-            gridLineWidth: 1,
-            gridLineColor: "#999999",
-            gridLineDashStyle: 'ShortDot',
-            title: {
-                text: null
-            },
-            labels: {
-                formatter: function () {
-                    return this.value + "%";
-                },
-                style: {
-                    fontSize: "14px",
-                    fontFamily: "Arial",
-                    color: "#999999"
-                }
-            }
-        },
-        legend: {
-            enabled: false
-        },
+                $(containerID).highcharts({
+                    chart: {
+                        type: "spline",
+                        backgroundColor: "#000000"
+                    },
+                    credits: {enabled: false},
+                    exporting: {enabled: false},
+                    title: {
+                        text: null
+                    },
+                    subtitle: {
+                        text: null
+                    },
+                    xAxis: {
+                        tickmarkPlacement: 'on',
+                        gridLineColor: "#999999",
+                        gridLineWidth: 1,
+                        lineWidth: 0,
+                        gridLineDashStyle: 'ShortDot',
+                        title: {
+                            text: "Возраст",
+                            style: {
+                                fontSize: "14px",
+                                fontFamily: "Arial",
+                                color: "#999999"
+                            }
+                        },
+                        categories: ["35", "37", "39", "41", "43", "45", "47", "49", "51", "53", "55", "57", "59", "61"],
+                        labels: {
+                            style: {
+                                fontSize: "14px",
+                                fontFamily: "Arial",
+                                color: "#999999"
+                            }
+                        }
+                    },
+                    yAxis: {
+                        lineWidth: 0,
+                        gridLineWidth: 1,
+                        gridLineColor: "#999999",
+                        gridLineDashStyle: 'ShortDot',
+                        title: {
+                            text: null
+                        },
+                        labels: {
+                            formatter: function () {
+                                return this.value + "%";
+                            },
+                            style: {
+                                fontSize: "14px",
+                                fontFamily: "Arial",
+                                color: "#999999"
+                            }
+                        }
+                    },
+                    legend: {
+                        enabled: false
+                    },
 
-        plotOptions: {
-            spline: {
-                lineWidth: 4,
-                marker: {
-                    enabled: false
-                }
-            }
-        },
-        tooltip: {
-            crosshairs: true,
-            valueSuffix: '%'
-        },
-        series: [{
-            name: ' ',
-            data: [7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6],
-            color: "#810000"
-        }
-        ]
-    });
+                    plotOptions: {
+                        spline: {
+                            lineWidth: 4,
+                            marker: {
+                                enabled: false
+                            }
+                        }
+                    },
+                    tooltip: {
+                        crosshairs: true,
+                        valueSuffix: '%'
+                    },
+                    series: [{
+                        name: ' ',
+                        data: [7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6],
+                        color: "#810000"
+                    }
+                    ]
+                });
 
-    $("#smoke-btn").click(function () {
-        var chart = $(containerID).highcharts();
-        chart.series[0].setData([10.0, 12.9, 1.5, 15.5, 8.2, 1.5, 5.2, 6.5, 53.3, 15.3, 23.9, 4.6]);
-    });
 
-    $("#weight-btn").click(function () {
-        var chart = $(containerID).highcharts();
-        chart.xAxis[0].setCategories(["87", "89", "91", "93", "95", "97", "99", "101", "103", "105", "107", "109", "111", "113"]);
-        chart.xAxis[0].axisTitle.attr({
-            text: 'Вес'
-        });
-        setTimeout(function () {
-            chart.series[0].setData([40.0, 22.9, 12.5, 45.5, 12.2, 5.5, 23.2, 2.5, 3.3, 45.3, 63.9, 1.6]);
-        }, 500);
+                $("#weight-btn").click(function () {
+                    var chart = $(containerID).highcharts();
 
-    });
-});
+
+                });
+            });
         </script>
         <script>
             $(document).ready(function () {
+                var containerID = '#main-chart';
+                var chart = $(containerID).highcharts();
                 var isSmokeEnabled = false;
-           $("#smoke-btn").click(function () {
-               if (isSmokeEnabled) {
-                   isSmokeEnabled = false;
-                   $(this).css({"background": "url({% static 'app/img/nosmoke-01.svg' %}) no-repeat"});
-               } else {
-                   isSmokeEnabled = true;
-                   $(this).css({"background": "url({% static 'app/img/smoke-01.svg' %}) no-repeat"});
-               }
-           })
-            })
+                $("#smoke-btn").click(function () {
+                    if (isSmokeEnabled) {
+                        chart.series[0].setData([7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6]);
+                        isSmokeEnabled = false;
+                        $(this).css({"background": "url({% static 'app/img/nosmoke-01.svg' %}) no-repeat"});
+                    } else {
+                        chart.series[0].setData([10.0, 12.9, 1.5, 15.5, 8.2, 1.5, 5.2, 6.5, 53.3, 15.3, 23.9, 4.6]);
+                        isSmokeEnabled = true;
+                        $(this).css({"background": "url({% static 'app/img/smoke-01.svg' %}) no-repeat"});
+                    }
+                });
+                $("#weight-btn").click(function () {
+                    $(".switch-btn").css({"border": "0"});
+                    $(this).css({"border": "1px solid #27AE60 "});
+                    chart.xAxis[0].setCategories(["87", "89", "91", "93", "95", "97", "99", "101", "103", "105", "107", "109", "111", "113"]);
+                    chart.xAxis[0].axisTitle.attr({
+                        text: 'Вес'
+                    });
+                    setTimeout(function () {
+                        chart.series[0].setData([40.0, 22.9, 12.5, 45.5, 12.2, 5.5, 23.2, 2.5, 3.3, 45.3, 63.9, 1.6]);
+                    }, 500);
+                });
 
+                $("#age-btn").click(function () {
+                    $(".switch-btn").css({"border": "0"});
+                    $(this).css({"border": "1px solid #27AE60 "});
+                    chart.xAxis[0].setCategories(["35", "37", "39", "41", "43", "45", "47", "49", "51", "53", "55", "57", "59", "61"]);
+                    chart.xAxis[0].axisTitle.attr({
+                        text: 'Возраст'
+                    });
+                    setTimeout(function () {
+                        chart.series[0].setData([30.0, 22.9, 2.5, 15.5, 12.2, 56.5, 23.2, 42.5, 3.3, 15.3, 63.9, 1.6]);
+                    }, 500);
+                });
+            });
 
         </script>
 
-    <div id="main-chart" style="width: 100%; height: 500px"></div>
+        <div id="main-chart" style="width: 100%; height: 500px"></div>
     </div>
     <div class="col-md-5">
 
-        <div id="smoke-btn" style="width: 100px; height: 100px; background: url({% static 'app/img/nosmoke-01.svg' %}) no-repeat;cursor: pointer"></div>
-{#        <button type="button" class="btn btn-lg btn-primary" id="weight-btn">Посчитать прогноз для веса</button>#}
+        <div id="smoke-btn"
+             style="display: inline-block; width: 100px; height: 100px; background: url({% static 'app/img/nosmoke-01.svg' %}) no-repeat;cursor: pointer"></div>
+        <div id="weight-btn" class="switch-btn"
+             style="display: inline-block; width: 100px; height: 100px; background: url({% static 'app/img/emoes-01.svg' %}) no-repeat; cursor: pointer; border: 1px solid #27AE60 "></div>
+        <div id="age-btn" class="switch-btn"
+             style="display: inline-block; width: 100px; height: 100px; background: url({% static 'app/img/history-01.svg' %}) no-repeat; cursor: pointer"></div>
     </div>
 {% endblock %}
