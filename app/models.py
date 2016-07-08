@@ -1,7 +1,8 @@
 """
 Definition of models.
 """
-import datetime
+from datetime import datetime
+from dateutil.relativedelta import relativedelta
 from django.db import models
 
 
@@ -24,10 +25,15 @@ class Person(models.Model):
 
     @property
     def age(self):
-        now = datetime.datetime.now()
+        now = datetime.now()
         current_year = int(now.year)
         birth_year = int(self.birthday.year)
         return current_year - birth_year
+
+    @age.setter
+    def age(self, value):
+        now = datetime.now()
+        self.birthday = now - relativedelta(years=value)
 
 
 class Disease(models.Model):

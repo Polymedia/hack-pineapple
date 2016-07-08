@@ -61,9 +61,16 @@ def show_patient_prediction_details(request,
                                     prediction_path):
     person = Person.objects.get(id=patient_id)
     diseases = Disease.objects.filter(id_person=patient_id).order_by('start_date')
+
+    keys_age = [35, 37, 39, 41, 43, 45, 47, 49, 51, 53, 55, 57, 59, 61]
+    predictions_age = {
+        'labels': list(map(str, keys_age)),
+        'values': predictor.probabilities(person, 'age', keys_age)
+    }
+
     context = {'person': person,
                'diseases': diseases,
-               'predictor': predictor}
+               'predictions_age': predictions_age}
     return render(request=request,
                   template_name='app/patient/prediction_details.html',
                   context=context)
