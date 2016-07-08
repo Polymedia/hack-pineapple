@@ -10,6 +10,8 @@ from app.models import Disease
 from app.predictor import Predictor
 
 
+predictor = Predictor(path='db.sqlite3')
+
 def home(request):
     """Renders the home page."""
     assert isinstance(request, HttpRequest)
@@ -43,10 +45,9 @@ def show_patient_info(request, patient_id):
 def show_patient_prediction(request, patient_id):
     person = Person.objects.get(id=patient_id)
     diseases = Disease.objects.filter(id_person=patient_id).order_by('start_date')
-    predictor = Predictor(path=None)
-    pred_probs = predictor.probabilities(patient_id,
-                                         factor=None,
-                                         values=None)
+    pred_probs = {
+        'Инфаркт': predictor.probability(person)
+    }
     context = {'person': person,
                'diseases': diseases,
                'predictions': pred_probs}
@@ -58,7 +59,6 @@ def show_patient_prediction(request, patient_id):
 def show_patient_prediction_details(request, patient_id):
     person = Person.objects.get(id=patient_id)
     diseases = Disease.objects.filter(id_person=patient_id).order_by('start_date')
-    predictor = Predictor(path=None)
     context = {'person': person,
                'diseases': diseases,
                'predictor': predictor}
