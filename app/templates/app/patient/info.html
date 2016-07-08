@@ -9,7 +9,7 @@
             <img src="{% static 'app/img/predictions.png' %}" style="width: 20px; height: 20px"/>
         </a>
     </div>
-    {% for disease in diseases %}
+{#    {% for disease in diseases %}#}
     <h3 class="text-uppercase">{{ disease.disease }}</h3>
     <div style="border-bottom: 1px solid #c8c8c8;"></div>
     <p class="text-uppercase">начало лечения {{ disease.start_date | date:"d E Y" }} года</p>
@@ -39,6 +39,6 @@
             <div style="text-align: center">Кровь</div>
         </div>
     </div>
-    {% endfor %}
+{#    {% endfor %}#}
 </div>
 {% endblock %}
