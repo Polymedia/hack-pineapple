@@ -4,15 +4,17 @@
     <div class="col-md-5" >
         <span class="spacer10"></span>
     </div>
-    <div class="col-md-5" >
-        <span class="h1">Вероятность возникновения заболевания</span>
-    </div>
-    <div class="col-md-5" >
-        <div class="col-md-4">
-            <span class="h4">Инфраркт</span>
-        </div>
-        <div class="class-md-1">
-            <span class="h1 big white"><a href="/history/patient/{{ person.id }}/prediction/1">78%</a></span>
-        </div>
-    </div>
+	<div class="col-md-5">
+		<span class="h1">Вероятность возникновения заболевания</span>
+	</div>
+	{% for disease, prediction in predictions.items %}
+	<div class="col-md-5">
+		<div class="col-md-4">
+			<span class="h4">{{disease}}</span>
+		</div>
+		<div class="class-md-1">
+			<span class="h1 big white"><a href="/history/patient/{{ person.id }}/prediction/1">{{prediction|floatformat}}%</a></span>
+		</div>
+	</div>
+	{% endfor %}
 {% endblock %}
