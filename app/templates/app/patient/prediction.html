@@ -6,12 +6,12 @@
             <span class="h4">Вероятность возникновения болезни</span>
         </div>
         <div style="border-bottom: 1px solid #c8c8c8;"></div>
-        {% for prediction in predictions %}
+        {% for disease, prediction in predictions.items %}
         <div class="col-md-4">
-            <span class="h4">Болезнь</span>
+            <span class="h4">{{disease}}</span>
         </div>
         <div class="col-md-1">
-            <span class="h3 text-capitalize">45%</span>
+            <span class="h3 text-capitalize">{{prediction|floatformat}}%</span>
         </div>
         {% endfor %}
     </div>

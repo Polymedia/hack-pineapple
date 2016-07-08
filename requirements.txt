@@ -1,3 +1,2 @@
 django<2
-#psycopg2
 wheel==0.24.0
