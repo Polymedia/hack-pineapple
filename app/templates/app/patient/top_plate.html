@@ -1,0 +1,66 @@
+<div class="row">
+    <div class="header-name col-md-12">
+        <span class="head">Пациент</span>
+        <span class="h1">{{ person.last_name }} {{ person.name }}</span>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-1 head-info-block">
+    <span>Пол</span>
+    <span class="h1">{% if person.sex %}М{% else %}Ж{% endif %}</span>
+    </div>
+    <div class="col-md-1 head-info-block">
+    <span>Возраст</span>
+    <span class="h1">{{ person.age }}</span>
+    </div>
+    <div class="col-md-1 head-info-block">
+    <span>Дата рождения</span>
+    <span class="h1">{{ person.birthday | date:"d E Y" }}</span> {# ДД месяц (в локали) год - https://docs.djangoproject.com/en/1.9/ref/templates/builtins/#date#}
+    </div>
+    <div class="col-md-1 head-info-block">
+    <span>Инвалидность</span>
+    <span class="h1">3 степень</span>
+      {# TODO Add disability field #}
+    </div>
+    <div class="col-md-1 head-info-block">
+    <span>Группа крови</span>
+    <span class="h1">
+        {% if person.blood_type == 0 %}
+            Type {{ person.blood_type }}
+        {% endif %}
+        {% if person.blood_type == 1 %}
+            Type {{ person.blood_type }}
+        {% endif %}
+        {% if person.blood_type == 2 %}
+            Type {{ person.blood_type }}
+        {% endif %}
+        {% if person.blood_type == 3 %}
+            Type {{ person.blood_type }}
+        {% endif %}
+        {% if person.blood_type == 4 %}
+            Type {{ person.blood_type }}
+        {% endif %}
+        {% if person.blood_type == 5 %}
+            Type {{ person.blood_type }}
+        {% endif %}
+        {% if person.blood_type == 6 %}
+            Type {{ person.blood_type }}
+        {% endif %}
+    </span>
+    </div>
+    <div class="col-md-1 head-info-block">
+    <span>Курение</span>
+    <span class="h1">
+        {% if person.smoker %}
+            Да
+            {% else %}
+            Нет
+        {% endif %}
+    </span>
+    </div>
+    <div class="col-md-1 head-info-block">
+    <span>Вес</span>
+    <span class="h1">{{ person.weight | floatformat:2 }} кг</span>
+  </div>
+</div>

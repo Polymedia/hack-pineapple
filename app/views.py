@@ -89,5 +89,5 @@ def show_patient(request, patient_id):
     context = {'person': person,
                'diseases': diseases}
     return render(request=request,
-                  template_name='app/history.html',
+                  template_name='app/patient/info.html',
                   context=context)
