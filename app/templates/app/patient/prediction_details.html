@@ -109,11 +109,11 @@
 
             $("#smoke-btn").click(function () {
                 if (isSmokeEnabled) {
-                    chart.series[0].setData([7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6]);
+                    chart.series[0].setData({{predictions_weight.values_s}});
                     isSmokeEnabled = false;
                     $(this).css({"background": "url({% static 'app/img/nosmoke-01.svg' %}) no-repeat"});
                 } else {
-                    chart.series[0].setData([10.0, 12.9, 1.5, 15.5, 8.2, 1.5, 5.2, 6.5, 53.3, 15.3, 23.9, 4.6]);
+                    chart.series[0].setData({{predictions_weight.values}});
                     isSmokeEnabled = true;
                     $(this).css({"background": "url({% static 'app/img/smoke-01.svg' %}) no-repeat"});
                 }
@@ -121,7 +121,7 @@
 
             $("#weight-btn").click(function () {
                 switchBtn(this);
-                    chart.xAxis[0].setCategories({{predictions_weight.labels|safe}});
+                chart.xAxis[0].setCategories({{predictions_weight.labels|safe}});
                 chart.xAxis[0].axisTitle.attr({
                     text: 'Вес'
                 });
@@ -132,7 +132,7 @@
 
             $("#age-btn").click(function () {
                 switchBtn(this);
-                    chart.xAxis[0].setCategories({{predictions_age.labels|safe}});
+                chart.xAxis[0].setCategories({{predictions_age.labels|safe}});
                 chart.xAxis[0].axisTitle.attr({
                     text: 'Возраст'
                 });
