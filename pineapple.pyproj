@@ -29,6 +29,7 @@
   <ItemGroup>
     <Compile Include="app\forms.py" />
     <Compile Include="app\models.py" />
+    <Compile Include="app\predictor.py" />
     <Compile Include="app\tests.py" />
     <Compile Include="app\views.py" />
     <Compile Include="app\__init__.py" />
@@ -47,11 +48,19 @@
     <Folder Include="app\static\app\scripts\" />
     <Folder Include="app\templates\" />
     <Folder Include="app\templates\app\" />
+    <Folder Include="app\templates\app\patient\" />
     <Folder Include="pineapple\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="app\templates\app\history.html" />
+    <Content Include="app\templates\app\patient\body.html" />
+    <Content Include="app\templates\app\patient\history.html" />
+    <Content Include="app\templates\app\patient\info.html" />
+    <Content Include="app\templates\app\patient\prediction.html" />
+    <Content Include="app\templates\app\patient\prediction_details.html" />
+    <Content Include="app\templates\app\patient\top_plate.html" />
     <Content Include="app\templates\app\prediction.html" />
+    <Content Include="app\templates\app\scripts.html" />
+    <Content Include="app\templates\app\styles.html" />
     <Content Include="requirements.txt" />
     <Content Include="db.sqlite3" />
     <Content Include="app\static\app\content\bootstrap.css" />
