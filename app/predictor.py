@@ -15,10 +15,16 @@ class Predictor:
 
     def probability(self, person):
         values = [person.__dict__[f] for f in self.factors]
-        return self.model.predict(values)[0]
+        return self.model.predict(values)[0] * 100
 
     def probabilities(self, person, factor, values):
-        return list((1, 2, 3))
+        probs = []
+        for value in values:
+            setattr(person, factor, value)
+            pvalues = [person.__dict__[f] for f in self.factors]
+            prob = self.model.predict(pvalues)[0] * 100
+            probs.append(prob)
+        return probs
 
     def _model(self, disease='Инфаркт'):
         persons = self.cursor.execute('''
