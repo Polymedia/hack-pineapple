@@ -3,9 +3,14 @@
 
 {% block info %}
 <div class="col-md-5">
+
+    <div class="col-md-1 col-md-offset-4">
+        <a href="/history/patient/{{ person.id }}/prediction">
+            <img src="{% static 'app/img/predictions.png' %}" style="width: 20px; height: 20px"/>
+        </a>
+    </div>
     {% for disease in diseases %}
     <h3 class="text-uppercase">{{ disease.disease }}</h3>
-
     <div style="border-bottom: 1px solid #c8c8c8;"></div>
     <p class="text-uppercase">начало лечения {{ disease.start_date | date:"d E Y" }} года</p>
 
@@ -14,16 +19,14 @@
             <div style="text-align: right; display: inline-block; float: right;">{{ disease.end_date | date:"d E Y" }}</div>
         </div>
     </div>
-    <div class="block-text">Lorem ipsum dolor sit amet, consectetur adipiscing
-        elit. Integer posuere erat a ante>Lorem ipsum dolor
-        sit amet, consectetur adipiscing elit. Integer posuere erat a ante>Lorem ipsum dolor sit amet,
-        consectetur adipiscing elit. Integer posuere erat a ante.
+    <div class="block-text">
+        {{ disease.medical_report }}
     </div>
     <div class="text-uppercase block-title">рецепт врача</div>
     <div class="block-text">
-        <div>Пенталагин: <span style="color: white">1 таб. каждые 6 часов</span></div>
-        <div>Пенталагин: <span style="color: white">1 таб. каждые 6 часов</span></div>
-        <div>Пенталагин: <span style="color: white">1 таб. каждые 6 часов</span></div>
+        <div>Пенталгин: <span style="color: white">1 таб. каждые 6 часов</span></div>
+        <div>Ибупрофен: <span style="color: white">1/2 таб. каждые 4 часа</span></div>
+        <div>Аспирин: <span style="color: white">1 таб. каждый день</span></div>
     </div>
     <div class="text-uppercase block-title">анализы</div>
     <div>

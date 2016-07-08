@@ -7,6 +7,7 @@ from django.template import RequestContext
 from datetime import datetime
 from app.models import Person
 from app.models import Disease
+from app.predictor import Predictor
 
 
 def home(request):
@@ -24,70 +25,43 @@ def home(request):
     )
 
 
-# def contact(request):
-#     """Renders the contact page."""
-#     assert isinstance(request, HttpRequest)
-#     return render(
-#         request,
-#         'app/contact.html',
-#         context_instance = RequestContext(request,
-#         {
-#             'title':'Contact',
-#             'message':'Your contact page.',
-#             'year':datetime.now().year,
-#         })
-#     )def contact(request):
-#     """Renders the contact page."""
-#     assert isinstance(request, HttpRequest)
-#     return render(
-#         request,
-#         'app/contact.html',
-#         context_instance = RequestContext(request,
-#         {
-#             'title':'Contact',
-#             'message':'Your contact page.',
-#             'year':datetime.now().year,
-#         })
-#     )
-
-
-# def about(request):
-#     """Renders the about page."""
-#     assert isinstance(request, HttpRequest)
-#     return render(
-#         request,
-#         'app/about.html',
-#         context_instance = RequestContext(request,
-#         {
-#             'title':'About',
-#             'message':'Your application description page.',
-#             'year':datetime.now().year,
-#         })
-#     )
-
-
 def history(request):
     assert isinstance(request, HttpRequest)
     return redirect('/')
 
 
-def prediction(request):
-    assert isinstance(request, HttpRequest)
-    return render(
-        request,
-        'app/prediction.html',
-        context_instance = RequestContext(request,
-        {
-
-        })
-    )
-
-
-def show_patient(request, patient_id):
+def show_patient_info(request, patient_id):
     person = Person.objects.get(id=patient_id)
-    diseases = Disease.objects.filter(id_person=patient_id)
+    diseases = Disease.objects.filter(id_person=patient_id).order_by('start_date')
     context = {'person': person,
                'diseases': diseases}
     return render(request=request,
                   template_name='app/patient/info.html',
+                  context=context)
+
+
+def show_patient_prediction(request, patient_id):
+    person = Person.objects.get(id=patient_id)
+    diseases = Disease.objects.filter(id_person=patient_id).order_by('start_date')
+    predictor = Predictor(path=None)
+    pred_probs = predictor.probabilities(patient_id,
+                                         factor=None,
+                                         values=None)
+    context = {'person': person,
+               'diseases': diseases,
+               'predictions': pred_probs}
+    return render(request=request,
+                  template_name='app/patient/prediction.html',
+                  context=context)
+
+
+def show_patient_prediction_details(request, patient_id):
+    person = Person.objects.get(id=patient_id)
+    diseases = Disease.objects.filter(id_person=patient_id).order_by('start_date')
+    predictor = Predictor(path=None)
+    context = {'person': person,
+               'diseases': diseases,
+               'predictor': predictor}
+    return render(request=request,
+                  template_name='app/patient/prediction_details.html',
                   context=context)

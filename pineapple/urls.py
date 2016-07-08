@@ -9,9 +9,14 @@ urlpatterns = [
 
     url(r'^$', app.views.home, name='home'),
     url(r'^history$', app.views.history, name='history'),
-    url(r'^prediction', app.views.prediction, name='prediction'),
     url(r'^history/patient/(?P<patient_id>[0-9]+)$',
-        view=app.views.show_patient,
-        name='patient_history')
-
+        view=app.views.show_patient_info,
+        name='patient_history'),
+    url(r'^history/patient/(?P<patient_id>[0-9]+)/prediction$',
+        view=app.views.show_patient_prediction,
+        name='patient_diseases_prediction'),
+    url(r'^history/patient/(?P<patient_id>[0-9]+)/prediction'
+        r'/(?P<prediction_path>[0-9]+)',
+        view=app.views.show_patient_prediction_details,
+        name='patient_diseases_prediction_details')
 ]

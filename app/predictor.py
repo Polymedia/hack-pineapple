@@ -3,10 +3,12 @@ class Predictor:
         pass
 
     def factors(self):
-        pass
+        return {'1': "factor1",
+                '2': "factor2",
+                '3': 'factor3'}
 
     def probability(self, person):
-        pass
+        return 24.2
 
     def probabilities(self, person, factor, values):
-        pass
+        return list((1, 2, 3))

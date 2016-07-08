@@ -1,4 +1,18 @@
 {% extends 'app/patient/history.html' %}
 
 {% block info %}
+    <div class="col-md-5">
+        <div class="col-md-5">
+            <span class="h4">Вероятность возникновения болезни</span>
+        </div>
+        <div style="border-bottom: 1px solid #c8c8c8;"></div>
+        {% for prediction in predictions %}
+        <div class="col-md-4">
+            <span class="h4">Болезнь</span>
+        </div>
+        <div class="col-md-1">
+            <span class="h3 text-capitalize">45%</span>
+        </div>
+        {% endfor %}
+    </div>
 {% endblock %}
