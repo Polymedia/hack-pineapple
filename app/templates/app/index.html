@@ -17,7 +17,7 @@
     <div class="row">
         <ul id="patients_list">
         {% for person in people %}
-          <li><span><a href="history/patient/{{ person.id }}">{{ person.last_name }} {{ person.name }}</a></span></li>
+          <li><span><a href="history/patient/{{ person.id }}/prediction">{{ person.last_name }} {{ person.name }}</a></span></li>
         {% endfor %}
         </ul>
     </div>

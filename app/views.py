@@ -55,7 +55,9 @@ def show_patient_prediction(request, patient_id):
                   context=context)
 
 
-def show_patient_prediction_details(request, patient_id):
+def show_patient_prediction_details(request,
+                                    patient_id,
+                                    prediction_path):
     person = Person.objects.get(id=patient_id)
     diseases = Disease.objects.filter(id_person=patient_id).order_by('start_date')
     predictor = Predictor(path=None)
